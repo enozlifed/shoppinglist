@@ -17,10 +17,10 @@ sealed class ShoppingListRecyclerViewHolder(binding: ViewBinding) :
     ) : ShoppingListRecyclerViewHolder(binding) {
 
         fun bind(item: ShoppingItemEntity) = with(binding) {
-            cbShoppingItem.isChecked = item.checkBoxState
+            cbShoppingItem.isChecked = item.isChecked
             tvShoppingItem.text = item.description
 
-            if (item.checkBoxState) {
+            if (item.isChecked) {
                 tvShoppingItem.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                 tvShoppingItem.setTextColor(ContextCompat.getColor(tvShoppingItem.context, R.color.hintColor))
             } else {
@@ -28,9 +28,8 @@ sealed class ShoppingListRecyclerViewHolder(binding: ViewBinding) :
                 tvShoppingItem.setTextColor(ContextCompat.getColor(tvShoppingItem.context, R.color.primary_text_color))
             }
 
-            val updatedItem = item.copy(checkBoxState = !item.checkBoxState)
-            cbShoppingItem.setOnClickListener { onCheckBoxClick?.invoke(updatedItem) }
-            tvShoppingItem.setOnClickListener { onCheckBoxClick?.invoke(updatedItem) }
+            val updatedItem = item.copy(isChecked = !item.isChecked)
+            clShoppingItem.setOnClickListener { onCheckBoxClick?.invoke(updatedItem) }
         }
     }
 }

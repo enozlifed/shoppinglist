@@ -11,7 +11,7 @@ import com.example.samplecode.util.diffutil.ShoppingListRecyclerViewDiffCallback
 class ShoppingItemListAdapter :
     RecyclerView.Adapter<ShoppingListRecyclerViewHolder>() {
 
-    var onCheckBoxClick: ((ShoppingItemEntity) -> Unit)? = null
+    var onItemCheckedChanged : ((ShoppingItemEntity) -> Unit)? = null
 
     private var items = emptyList<ShoppingItemEntity>()
 
@@ -21,7 +21,7 @@ class ShoppingItemListAdapter :
             parent,
             false
         )
-        return ShoppingListRecyclerViewHolder.ShoppingListViewHolder(binding, onCheckBoxClick)
+        return ShoppingListRecyclerViewHolder.ShoppingListViewHolder(binding, onItemCheckedChanged )
     }
 
     override fun onBindViewHolder(holder: ShoppingListRecyclerViewHolder, position: Int) {

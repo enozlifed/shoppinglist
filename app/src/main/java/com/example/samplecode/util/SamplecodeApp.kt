@@ -5,12 +5,12 @@ import com.example.samplecode.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
-class Samplecode : Application() {
+class SamplecodeApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
         startKoin {
-            androidContext(this@Samplecode)
+            androidContext(this@SamplecodeApp)
             modules(appModule)
         }
     }

@@ -72,7 +72,7 @@ class ShoppingListFragment : Fragment() {
 
     private fun initRecyclerView() {
         shoppingListAdapter = ShoppingItemListAdapter().apply {
-            onCheckBoxClick = {
+            onItemCheckedChanged  = {
                 shoppingListViewModel.setCheckboxState(it)
             }
         }

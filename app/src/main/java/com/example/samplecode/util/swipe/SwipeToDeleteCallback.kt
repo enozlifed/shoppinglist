@@ -11,12 +11,12 @@ import com.example.samplecode.R
 abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
     private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete_black)
-    private val color = ContextCompat.getColor(context, R.color.delete_color)
-    private val intrinsicWidth = deleteIcon!!.intrinsicWidth
-    private val intrinsicHeight = deleteIcon!!.intrinsicHeight
-    private val background = ColorDrawable()
-    private val backgroundColor = color
+    private val intrinsicWidth = deleteIcon?.intrinsicWidth ?: 0
+    private val intrinsicHeight = deleteIcon?.intrinsicHeight ?: 0
     private val clearPaint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
+    private val background = ColorDrawable().apply {
+        color = ContextCompat.getColor(context, R.color.delete_color)
+    }
 
     override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
         return false
@@ -26,7 +26,6 @@ abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleC
         c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
         dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
     ) {
-
         val itemView = viewHolder.itemView
         val itemHeight = itemView.bottom - itemView.top
         val isCanceled = dX == 0f && !isCurrentlyActive
@@ -37,7 +36,6 @@ abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleC
             return
         }
 
-        background.color = backgroundColor
         background.setBounds(itemView.right + dX.toInt(), itemView.top, itemView.right, itemView.bottom)
         background.draw(c)
 
@@ -47,8 +45,10 @@ abstract class SwipeToDeleteCallback(context: Context) : ItemTouchHelper.SimpleC
         val deleteIconRight = itemView.right - deleteIconMargin
         val deleteIconBottom = deleteIconTop + intrinsicHeight
 
-        deleteIcon!!.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
-        deleteIcon.draw(c)
+        deleteIcon?.let {
+            it.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
+            it.draw(c)
+        }
 
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }

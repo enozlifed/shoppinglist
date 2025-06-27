@@ -13,5 +13,5 @@ data class ShoppingItemEntity(
     @PrimaryKey(autoGenerate = false)
     val id: String,
     val description: String,
-    val checkBoxState: Boolean
+    val isChecked: Boolean
 ): Parcelable

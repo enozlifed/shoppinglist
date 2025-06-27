@@ -13,7 +13,7 @@ class ShoppingListViewModel(
     private val repositoryShoppingList: ShoppingItemRepository
 ) : ViewModel() {
 
-    val uiModel: StateFlow<ShoppingListScreenUiModel> = repositoryShoppingList.fetchAllItems
+    val uiModel: StateFlow<ShoppingListScreenUiModel> = repositoryShoppingList.fetchAllItems()
         .map { ShoppingListScreenUiModel(it) }
         .distinctUntilChanged()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), ShoppingListScreenUiModel(emptyList()))
@@ -26,7 +26,7 @@ class ShoppingListViewModel(
         val newItem = ShoppingItemEntity(
             id = UUID.randomUUID().toString(),
             description = description,
-            checkBoxState = false
+            isChecked = false
         )
         viewModelScope.launch(Dispatchers.IO) {
             repositoryShoppingList.addItem(newItem)
@@ -40,7 +40,7 @@ class ShoppingListViewModel(
     }
 
     fun onItemSwipedToDelete(item: ShoppingItemEntity) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             _eventFlow.emit(ShoppingListEvent.ShowUndoDeleteSnackbar(item))
         }
     }

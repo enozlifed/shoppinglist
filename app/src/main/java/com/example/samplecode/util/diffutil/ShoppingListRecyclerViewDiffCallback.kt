@@ -20,6 +20,6 @@ class ShoppingListRecyclerViewDiffCallback(
         val oldItem = oldList[oldItemPosition]
         val newItem = newList[newItemPosition]
         return oldItem.description == newItem.description &&
-                oldItem.checkBoxState == newItem.checkBoxState
+                oldItem.isChecked == newItem.isChecked
     }
 }
