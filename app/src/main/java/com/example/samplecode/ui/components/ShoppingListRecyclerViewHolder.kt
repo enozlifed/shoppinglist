@@ -1,4 +1,4 @@
-package com.example.samplecode.ui.base
+package com.example.samplecode.ui.components
 
 import android.graphics.Paint
 import androidx.core.content.ContextCompat

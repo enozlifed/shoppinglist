@@ -11,7 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.samplecode.ui.base.ShoppingItemListAdapter
+import com.example.samplecode.ui.components.ShoppingItemListAdapter
 import com.example.samplecode.databinding.FragmentShoppingListBinding
 import kotlinx.coroutines.launch
 import androidx.recyclerview.widget.ItemTouchHelper
