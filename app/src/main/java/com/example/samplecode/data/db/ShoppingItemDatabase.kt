@@ -1,9 +1,8 @@
-package com.example.samplecode.data.repo
+package com.example.samplecode.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.samplecode.data.model.ShoppingItemEntity
-import com.example.samplecode.data.repo.ShoppingItemDao
 
 @Database(
     entities = [ShoppingItemEntity::class],

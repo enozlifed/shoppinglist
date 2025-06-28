@@ -1,5 +1,6 @@
 package com.example.samplecode.data.repo
 
+import com.example.samplecode.data.db.ShoppingItemDao
 import com.example.samplecode.data.model.ShoppingItemEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged

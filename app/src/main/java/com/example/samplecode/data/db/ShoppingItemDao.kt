@@ -1,4 +1,4 @@
-package com.example.samplecode.data.repo
+package com.example.samplecode.data.db
 
 import androidx.room.*
 import com.example.samplecode.data.model.ShoppingItemEntity
