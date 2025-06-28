@@ -6,14 +6,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.samplecode.data.model.ShoppingItemEntity
 import com.example.samplecode.databinding.ShoppinglistItemBinding
+import com.example.samplecode.ui.model.ShoppingItemViewData
 import com.example.samplecode.util.diffutil.ShoppingListRecyclerViewDiffCallback
+import com.example.samplecode.util.mapper.toViewData
 
 class ShoppingItemListAdapter :
     RecyclerView.Adapter<ShoppingListRecyclerViewHolder>() {
 
-    var onItemCheckedChanged : ((ShoppingItemEntity) -> Unit)? = null
+    var onItemCheckedChanged : ((ShoppingItemViewData) -> Unit)? = null
 
-    private var items = emptyList<ShoppingItemEntity>()
+    private var items = emptyList<ShoppingItemViewData>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShoppingListRecyclerViewHolder {
         val binding = ShoppinglistItemBinding.inflate(
@@ -34,11 +36,13 @@ class ShoppingItemListAdapter :
     override fun getItemCount(): Int = items.size
 
     fun setData(newList: List<ShoppingItemEntity>) {
-        val diffUtil = ShoppingListRecyclerViewDiffCallback(items, newList)
+        val viewDataList = newList.map { it.toViewData() }
+
+        val diffUtil = ShoppingListRecyclerViewDiffCallback(items, viewDataList)
         val diffResult = DiffUtil.calculateDiff(diffUtil)
-        items = newList
+        items = viewDataList
         diffResult.dispatchUpdatesTo(this)
     }
 
-    fun getItemAt(position: Int): ShoppingItemEntity = items[position]
+    fun getItemAt(position: Int): ShoppingItemViewData = items[position]
 }

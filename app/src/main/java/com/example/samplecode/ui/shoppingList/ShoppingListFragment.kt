@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.samplecode.R
 import com.example.samplecode.data.model.ShoppingItemEntity
+import com.example.samplecode.util.mapper.toEntity
 import com.example.samplecode.util.swipe.SwipeToDeleteCallback
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -73,7 +74,7 @@ class ShoppingListFragment : Fragment() {
     private fun initRecyclerView() {
         shoppingListAdapter = ShoppingItemListAdapter().apply {
             onItemCheckedChanged  = {
-                shoppingListViewModel.setCheckboxState(it)
+                shoppingListViewModel.setCheckboxState(it.toEntity())
             }
         }
 
@@ -81,7 +82,7 @@ class ShoppingListFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val pos = viewHolder.layoutPosition
                 val item = shoppingListAdapter.getItemAt(pos)
-                shoppingListViewModel.onItemSwipedToDelete(item)
+                shoppingListViewModel.onItemSwipedToDelete(item.toEntity())
             }
         }
 

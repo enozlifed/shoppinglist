@@ -5,18 +5,18 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.example.samplecode.R
-import com.example.samplecode.data.model.ShoppingItemEntity
 import com.example.samplecode.databinding.ShoppinglistItemBinding
+import com.example.samplecode.ui.model.ShoppingItemViewData
 
 sealed class ShoppingListRecyclerViewHolder(binding: ViewBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     class ShoppingListViewHolder(
         private val binding: ShoppinglistItemBinding,
-        private val onCheckBoxClick: ((ShoppingItemEntity) -> Unit)?
+        private val onCheckBoxClick: ((ShoppingItemViewData) -> Unit)?
     ) : ShoppingListRecyclerViewHolder(binding) {
 
-        fun bind(item: ShoppingItemEntity) = with(binding) {
+        fun bind(item: ShoppingItemViewData) = with(binding) {
             cbShoppingItem.isChecked = item.isChecked
             tvShoppingItem.text = item.description
 
@@ -29,7 +29,9 @@ sealed class ShoppingListRecyclerViewHolder(binding: ViewBinding) :
             }
 
             val updatedItem = item.copy(isChecked = !item.isChecked)
-            clShoppingItem.setOnClickListener { onCheckBoxClick?.invoke(updatedItem) }
+            clShoppingItem.setOnClickListener {
+                onCheckBoxClick?.invoke(updatedItem)
+            }
         }
     }
 }
