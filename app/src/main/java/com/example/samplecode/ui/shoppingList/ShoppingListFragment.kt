@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.samplecode.R
 import com.example.samplecode.data.model.ShoppingItemEntity
-import com.example.samplecode.util.mapper.toEntity
+import com.example.samplecode.ui.model.toEntity
 import com.example.samplecode.util.swipe.SwipeToDeleteCallback
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel

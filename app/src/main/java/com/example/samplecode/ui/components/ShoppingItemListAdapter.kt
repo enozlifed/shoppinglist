@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.samplecode.data.model.ShoppingItemEntity
 import com.example.samplecode.databinding.ShoppinglistItemBinding
 import com.example.samplecode.ui.model.ShoppingItemViewData
+import com.example.samplecode.ui.model.toViewData
 import com.example.samplecode.util.diffutil.ShoppingListRecyclerViewDiffCallback
-import com.example.samplecode.util.mapper.toViewData
 
 class ShoppingItemListAdapter :
     RecyclerView.Adapter<ShoppingListRecyclerViewHolder>() {
